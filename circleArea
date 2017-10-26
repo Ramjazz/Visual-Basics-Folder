@@ -1,0 +1,15 @@
+Class Form1
+     Public Class calculateArea <Insert button click procedure here> Handles btnCalculateArea.Click
+      Dim radius as Single
+      Dim area as Single 
+      Const PI as Single = 3.1415
+      radius = Val(Me.txtRadius.Text)
+      area = PI*radius^2
+      Me.lblAnswer.Text = area
+     End Public
+     
+     Public Class changeText <Insert text change procedure here> Handles txtRadius.TextChange
+      Me.lblAnswer.Text = ""
+     End Public
+
+End Class
