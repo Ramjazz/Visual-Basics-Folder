@@ -12,7 +12,7 @@ Public Class Form1
         Nickel = remainderOfDimes \ 5
         Dim remainderofNickels As Integer = remainderOfDimes Mod 5
         Penny = remainderofNickels \ 1
-
+        
         Me.lblQuarter.Text = Quarter
         Me.lblDime.Text = Dime
         Me.lblNickel.Text = Nickel
