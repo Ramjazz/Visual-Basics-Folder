@@ -1,0 +1,28 @@
+Public Class Form1
+
+
+
+    Private Sub calculateChange(sender As Object, e As EventArgs) Handles btnCalculateChange.Click
+        Dim Quarter, Dime, Nickel, Penny As Integer
+        Dim setValue As Integer = Val(Me.txtChange.Text)
+        Quarter = setValue \ 25
+        Dim remainderOfQuarters As Integer = setValue Mod 25
+        Dime = remainderOfQuarters \ 10
+        Dim remainderOfDimes As Integer = remainderOfQuarters Mod 10
+        Nickel = remainderOfDimes \ 5
+        Dim remainderofNickels As Integer = remainderOfDimes Mod 5
+        Penny = remainderofNickels \ 1
+
+        Me.lblQuarter.Text = Quarter
+        Me.lblDime.Text = Dime
+        Me.lblNickel.Text = Nickel
+        Me.lblPenny.Text = Penny
+    End Sub
+
+    Private Sub txtChange_TextChanged(sender As Object, e As EventArgs) Handles txtChange.TextChanged
+        Me.lblQuarter.Text = ""
+        Me.lblNickel.Text = ""
+        Me.lblDime.Text = ""
+        Me.lblPenny.Text = ""
+    End Sub
+End Class
