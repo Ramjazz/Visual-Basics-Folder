@@ -1,0 +1,12 @@
+Class Form1
+     Public Class calculateArea <button procedure insert here> Handles btnCalculateArea.Click
+          Dim side As Single = Val(Me.txtSideLength.Text)
+          Dim area As single = side^2
+          Me.lblAnswer.Text = area
+     End Public
+     
+     Public Class changeText<Insert text changed procedure here> Handles txtSideLength.Click
+          Me.lblAnswer.Text = ""
+     End Public
+     
+End Class
