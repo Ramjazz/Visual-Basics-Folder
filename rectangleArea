@@ -1,0 +1,16 @@
+Class Form1
+  Public Class calculateArea <Insert Click Procedure Here> Handles btnCalculateArea.Click
+    Dim length As Single
+    Dim width As Single
+    Dim area As Single
+    length = Val(Me.txtLength.Text)
+    width = Val(Me.txtWidth.Text)
+    area = length*width
+    Me.lblAnswer.Text = area
+    End Public
+  Public Class changeText <Insert Text Procedure Here> Handles txtLength.TextChanged, txtWidth.TextChanged 
+    Me.lblAnswer.Text = ""
+    
+  End Public
+
+End Class
