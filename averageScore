@@ -1,0 +1,30 @@
+Public Class Form1
+    Private Sub AverageTheScore(sender As Object, e As EventArgs) Handles btnAverageScore.Click
+        Dim score As Single
+        Dim scoreAdded As Single
+        Dim userInput As String
+        Dim numbOfScores As Single
+        Dim average As Single
+        Const FLAG As Integer = -1
+
+        scoreAdded = 0
+        numbOfScores = 0
+        Do
+            userInput = InputBox("Enter Average, Press -1 to Submit", "Average Score")
+            score = Val(userInput)
+            If score <> FLAG Then
+                score += scoreAdded
+                numbOfScores += 1
+
+                scoreAdded = score
+                average = score / numbOfScores
+
+            End If
+
+        Loop While score <> FLAG
+        Me.lblNumberOfScores.Text = numbOfScores
+        Me.lblResponse.Text = average
+    End Sub
+End Class
+
+'Need to work on the userInput = Nothing, does not work for some reason
