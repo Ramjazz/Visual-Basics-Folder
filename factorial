@@ -1,0 +1,26 @@
+'Arjun Hariharan, Period 6, Factorial
+Public Class Form1
+    Private Sub factorialUp(sender As Object, e As EventArgs) Handles btnFactorial1.Click
+        Dim counterVariable As Integer = Val(Me.txtEnter.Text)
+        Dim factorial As Integer
+        factorial = 1
+        For what As Integer = 1 To counterVariable
+            factorial *= what
+            Me.lblResponse.Text = factorial
+        Next what
+    End Sub
+
+    Private Sub factorialDown(sender As Object, e As EventArgs) Handles btnFactorial2.Click
+        Dim counterVariable As Integer = Val(Me.txtEnter.Text)
+        Dim factorial As Integer
+        factorial = 1
+        For what As Integer = counterVariable To 1 Step -1
+            factorial *= what
+            Me.lblResponse.Text = factorial
+        Next
+    End Sub
+
+    Private Sub changeText(sender As Object, e As EventArgs) Handles txtEnter.TextChanged
+        Me.lblResponse.Text = ""
+    End Sub
+End Class
