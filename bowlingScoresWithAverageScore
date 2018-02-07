@@ -12,7 +12,10 @@ Public Class Form1
             userInput = InputBox("Enter scores here, enter -1 to exit", "Enter Scores")
             score = Val(userInput)
             If score <> FLAG And userInput <> Nothing Then
-
+                If score > 300 Then
+                    score = FLAG
+                    Me.lblResponse.Text = "Valid bowling scores go only up to 300"
+                End If
                 If highest > score Then
                     highest = highest
                 ElseIf highest < score Then
