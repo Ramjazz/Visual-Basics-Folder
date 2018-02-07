@@ -1,0 +1,34 @@
+Public Class Form1
+    Private userInput As String
+    Private score As Integer
+    Private highest As Integer
+    Private lowest As Integer
+    Const FLAG As Integer = -1
+
+    Private Sub enterTheScores(sender As Object, e As EventArgs) Handles btnEnterScores.Click
+        lowest = 301
+        Do
+            userInput = InputBox("Enter scores here, enter -1 to exit", "Enter Scores")
+            score = Val(userInput)
+            If score <> FLAG And userInput <> Nothing Then
+
+                If highest > score Then
+                    highest = highest
+                ElseIf highest < score Then
+                    highest = score
+                End If
+                If lowest < score Then
+                    lowest = lowest
+                ElseIf score < lowest Then
+                    lowest = score
+                End If
+            End If
+
+
+        Loop While score <> FLAG And userInput <> Nothing
+    End Sub
+
+    Private Sub analyzeForStats(sender As Object, e As EventArgs) Handles btnStatistics.Click
+        Me.lblResponse.Text = "Your highest score was " & highest & " and your lowest score was " & lowest
+    End Sub
+End Class
