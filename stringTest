@@ -1,0 +1,29 @@
+Public Class Form1
+    Private Sub findInitials(sender As Object, e As EventArgs) Handles btnFindInitials.Click
+        Dim first, middle, last As String
+
+        Dim userInput As String = Me.txtEnter.Text
+
+        first = userInput.Chars(0)
+
+
+
+        last = userInput.Chars((userInput.Length) - 1)
+        If userInput.Length Mod 2 = 1 Then
+            middle = userInput.Chars(userInput.Length \ 2)
+        Else
+            middle = "No middle letter"
+        End If
+
+        Me.lblFirst.Text = first
+        Me.lblMiddle.Text = middle
+        Me.lblLast.Text = last
+
+    End Sub
+
+    Private Sub changeText(sender As Object, e As EventArgs) Handles txtEnter.TextChanged
+        Me.lblFirst.Text = ""
+        Me.lblMiddle.Text = ""
+        Me.lblLast.Text = ""
+    End Sub
+End Class
