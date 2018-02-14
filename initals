@@ -1,0 +1,25 @@
+'Arjun Hariharan, Period 6, initials
+Public Class Form1
+
+    Private Sub clickTheButton(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnInitials.Click
+        Dim first, last As String
+        Dim userInput As String = Me.txtEnter.Text
+        Dim index As Integer
+
+
+        userInput = userInput.ToUpper
+
+        first = userInput.Chars(0)
+        index = userInput.IndexOf(" ")
+
+        last = userInput.Chars(index + 1)
+
+        Me.lblResponse.Text = first & last
+
+
+    End Sub
+
+    Private Sub changeText(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtEnter.TextChanged
+        Me.lblResponse.Text = ""
+    End Sub
+End Class
