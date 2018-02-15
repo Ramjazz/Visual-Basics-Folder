@@ -1,0 +1,25 @@
+Public Class Form1
+    Private Sub findMonogram(sender As Object, e As EventArgs) Handles btnFind.Click
+        Dim first, middle, last As String
+        Dim userInput As String = Me.txtEnter.Text
+        Dim index As Integer
+        Dim lastString As String
+
+
+        userInput = userInput.ToLower
+        first = userInput.Chars(0)
+        userInput = userInput.ToUpper
+        index = userInput.IndexOf(" ")
+        middle = userInput.Chars(index + 1)
+
+        userInput = userInput.ToLower
+        lastString = userInput.Remove(0, index + 1)
+        index = lastString.IndexOf(" ")
+        last = lastString(index + 1)
+        Me.lblResponse.Text = first & middle & last
+    End Sub
+
+    Private Sub changeText(sender As Object, e As EventArgs) Handles txtEnter.Click
+        Me.lblResponse.Text = ""
+    End Sub
+End Class
