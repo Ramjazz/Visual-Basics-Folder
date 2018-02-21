@@ -1,0 +1,16 @@
+Public Class Form1
+    Private Sub click(sender As Object, e As EventArgs) Handles btnEnter.Click
+        Dim userInputWord As String = Me.txtEnter.Text
+        Dim userInputLetter As Char = Me.txtEnterLetter.Text.ToUpper
+        Dim userInputLetter1 As Char = Me.txtEnterLetter.Text.ToLower
+        Dim response As Integer
+
+        For variable As Integer = 0 To userInputWord.Length - 1
+            If userInputLetter = userInputWord.Chars(variable) Or userInputLetter1 = userInputWord.Chars(variable) Then
+                response += 1
+            End If
+
+        Next variable
+        Me.lblResponse.Text = response
+    End Sub
+End Class
