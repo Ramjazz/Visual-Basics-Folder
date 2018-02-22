@@ -1,0 +1,20 @@
+Public Class Form1
+    Private Sub calculateNumbers(sender As Object, e As EventArgs) Handles btnCalculate.Click
+        Dim startNumber As Integer = Val(Me.txtStart.Text)
+        Dim endNumber As Integer = Val(Me.txtEnd.Text)
+        Dim response As String = ""
+        Dim sum As Integer = 0
+
+        For variable As Integer = startNumber To endNumber
+            sum += variable
+            response &= " + " & variable
+        Next variable
+        response = response.Remove(1, 2)
+        response = response & " = " & sum
+        Me.lblResponse.Text = response
+    End Sub
+
+    Private Sub changeText(sender As Object, e As EventArgs) Handles txtStart.TextChanged, txtEnd.TextChanged
+        Me.lblResponse.Text = ""
+    End Sub
+End Class
