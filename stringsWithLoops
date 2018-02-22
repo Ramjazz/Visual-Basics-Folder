@@ -1,0 +1,33 @@
+Public Class Form1
+    Private Sub listAllNumbers(sender As Object, e As EventArgs) Handles btnEnter.Click
+        Dim userInput As Integer = Val(Me.txtEnter.Text)
+        Const FLAG As Integer = -1
+        Dim forFlag As Integer = 0
+        Dim response As String = "0"
+        Dim counter As Integer
+
+
+        Do
+            If userInput > 0 Then
+                Do
+                    If counter <> userInput Then
+                        counter += 1
+                        response &= ", " & counter
+                    Else
+                        forFlag = FLAG
+                    End If
+                Loop While forFlag <> FLAG
+
+            Else
+                response = "Enter a valid number"
+                forFlag = FLAG
+            End If
+        Loop While forFlag <> FLAG
+        Me.lblResponse.Text = response
+
+    End Sub
+
+    Private Sub changeText(sender As Object, e As EventArgs) Handles txtEnter.TextChanged
+        Me.lblResponse.Text = ""
+    End Sub
+End Class
