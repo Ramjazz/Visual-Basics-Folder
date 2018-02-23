@@ -1,0 +1,31 @@
+Public Class Form1
+    Private Sub findVowels(sender As Object, e As EventArgs) Handles btnFindVowels.Click
+        Dim userInput As String = Me.txtEnter.Text.ToLower
+        Dim response As Integer = 0
+        Const A As Char = "a"
+        Const Ee As Char = "e"
+        Const I As Char = "i"
+        Const O As Char = "o"
+        Const U As Char = "u"
+
+        For variable As Integer = 0 To userInput.Length - 1
+            If A = userInput.Chars(variable) Then
+                response += 1
+            ElseIf Ee = userInput.Chars(variable) Then
+                response += 1
+            ElseIf I = userInput.Chars(variable) Then
+                response += 1
+            ElseIf O = userInput.Chars(variable) Then
+                response += 1
+            ElseIf U = userInput.Chars(variable) Then
+                response += 1
+            End If
+        Next variable
+        Me.lblResponse.Text = response
+
+    End Sub
+
+    Private Sub changeText(sender As Object, e As EventArgs) Handles txtEnter.TextChanged
+        Me.lblResponse.Text = ""
+    End Sub
+End Class
