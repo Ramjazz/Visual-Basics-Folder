@@ -1,0 +1,63 @@
+'Arjun Hariharan, Period 6, wordGuess
+Public Class Form1
+
+    Private Sub playGame(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnEnter.Click
+        Dim secretWord As String = InputBox("Player 1, enter your word here", Me.Text).ToUpper
+        Dim letterGuess As Char
+        Const FLAG As Char = "!"
+        Dim numGuesses As Integer = 0
+        Dim tempWord, fullWordGuess, letterInput As String
+        Dim wordGuessedSoFar As String = ""
+        Dim length As Integer = secretWord.Length
+        Dim wrongGuesses As Integer
+        Dim wrongLetters As String = ""
+
+
+        wordGuessedSoFar = wordGuessedSoFar.PadLeft(length, "-")
+        Me.lblGuess.Text = wordGuessedSoFar
+        Do
+            letterInput = InputBox("Player 2: Enter a letter or " & FLAG & " to guess word: ", Me.Text)
+            If letterInput <> Nothing And letterInput <> FLAG Then
+                letterGuess = letterInput.Trim.ToUpper.Chars(0)
+                numGuesses += 1
+                For I As Integer = 0 To length - 1
+                    If secretWord.Chars(I) = letterGuess Then
+                        tempWord = wordGuessedSoFar.Remove(I, 1)
+                        wordGuessedSoFar = tempWord.Insert(I, letterGuess)
+                    ElseIf I = length - 1 Then
+                        wrongGuesses += 1
+                        wrongLetters &= letterGuess
+
+                    End If
+
+                Next I
+                Me.lblGuess.Text = wordGuessedSoFar
+                Me.lblWrongGuesses.Text = wrongLetters
+            ElseIf wrongGuesses = 6 Then
+                MessageBox.Show("You guessed too many times!", Me.Text)
+
+
+            End If
+
+        Loop While letterInput <> FLAG And letterInput <> Nothing And wordGuessedSoFar <> secretWord
+
+        If wordGuessedSoFar = secretWord Then
+            MessageBox.Show("You guessed it in " & numGuesses & " guesses!")
+        ElseIf letterInput = Nothing Then
+            MessageBox.Show("Game over", Me.Text)
+        ElseIf letterInput = FLAG Then
+            fullWordGuess = InputBox("Try to guess the word:", Me.Text)
+            fullWordGuess = fullWordGuess.ToUpper.Trim
+            If fullWordGuess = secretWord Then
+                MessageBox.Show("You guessed it in " & numGuesses & " guesses!", Me.Text)
+            Else
+                MessageBox.Show("Sorry, you lose!", Me.Text)
+
+            End If
+
+        End If
+        Me.lblGuess.Text = secretWord
+    End Sub
+
+    
+End Class
