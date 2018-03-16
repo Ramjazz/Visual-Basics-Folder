@@ -1,0 +1,102 @@
+'Arjun Hariharan, Period 6, wordGuessWithAdditions
+Public Class Form1
+
+    Private Sub playGame(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnEnter.Click
+        Me.lblGuess.Text = ""
+        Me.lblWrongGuesses.Text = ""
+        Me.pctPCT.Image = My.Resources.Smiling_Emoji
+        Dim secretWord As String = InputBox("Player 1, enter your word here", Me.Text)
+        secretWord = secretWord.ToUpper.Trim
+        Dim letterGuess As Char
+        Const FLAG As Char = "!"
+        Dim numGuesses As Integer = 0
+        Dim fullWordGuess, letterInput As String
+        Dim tempWord As String
+        Dim wordGuessedSoFar As String = ""
+        Dim length As Integer = secretWord.Length
+        Dim wrongGuesses As Integer = 0
+        Dim wrongLetters As String = ""
+        Dim index As Integer
+        Dim space As Integer = 0
+
+
+        For I As Integer = 0 To length - 1
+            If secretWord.Chars(I) = " " Then
+                space += 1
+            End If
+        Next
+        If secretWord.Length < 2 Then
+            MessageBox.Show("That's not a valid word", Me.Text)
+        Else
+            If space = 0 Then
+                wordGuessedSoFar = wordGuessedSoFar.PadLeft(length, "-")
+                Me.lblGuess.Text = wordGuessedSoFar
+                Do
+
+
+                    letterInput = InputBox("Player 2: Enter a letter or " & FLAG & " to guess word: ", Me.Text)
+                    If letterInput <> Nothing And letterInput <> FLAG Then
+                        letterGuess = letterInput.Trim.ToUpper.Chars(0)
+                        numGuesses += 1
+                        For I As Integer = 0 To length - 1
+                            If secretWord.Chars(I) = letterGuess Then
+                                tempWord = wordGuessedSoFar.Remove(I, 1)
+                                wordGuessedSoFar = tempWord.Insert(I, letterGuess)
+                            End If
+
+                        Next I
+
+                        index = wordGuessedSoFar.IndexOf(letterGuess)
+                        If index = -1 Then
+                            wrongGuesses += 1
+                            wrongLetters &= letterGuess & " "
+
+                            If wrongGuesses < 2 Then
+                                Me.pctPCT.Image = My.Resources.Smiling_Emoji
+                            ElseIf wrongGuesses < 4 Then
+                                Me.pctPCT.Image = My.Resources.Face_With_Rolling_Eyes_Emoji_grande
+                            ElseIf wrongGuesses < 6 Then
+                                Me.pctPCT.Image = My.Resources.Emoji_post_image5
+                            Else
+                                Me.pctPCT.Image = My.Resources._15106083_G
+                            End If
+
+
+                        End If
+
+                        Me.lblGuess.Text = wordGuessedSoFar
+                        Me.lblWrongGuesses.Text = wrongLetters
+
+
+                    End If
+
+                Loop While letterInput <> FLAG And letterInput <> Nothing And wordGuessedSoFar <> secretWord And wrongGuesses <> 6 And space = 0
+
+            End If
+            
+            
+
+            If wordGuessedSoFar = secretWord Then
+                MessageBox.Show("You guessed it in " & numGuesses & " guesses!")
+                Me.pctPCT.Image = My.Resources.Silly_Emoji
+            ElseIf space > 0 Then
+                MessageBox.Show("You can only have a word, not a phrase", Me.Text)
+
+            ElseIf wrongGuesses = 6 Then
+                MessageBox.Show("Sorry you guessed too many times!", Me.Text)
+            ElseIf letterInput = Nothing Then
+                MessageBox.Show("Game over", Me.Text)
+                Me.pctPCT.Image = My.Resources._15106083_G
+            ElseIf letterInput = FLAG Then
+                fullWordGuess = InputBox("Try to guess the word:", Me.Text)
+                fullWordGuess = fullWordGuess.ToUpper.Trim
+                If fullWordGuess = secretWord Then
+                    MessageBox.Show("You guessed it in " & numGuesses & " guesses!", Me.Text)
+                    Me.pctPCT.Image = My.Resources.Silly_Emoji
+                Else
+                    MessageBox.Show("Sorry, you lose!", Me.Text)
+                    Me.pctPCT.Image = My.Resources._15106083_G
+                End If
+
+            End If
+            Me.lblGuess.Text = secretWord
