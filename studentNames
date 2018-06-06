@@ -1,0 +1,14 @@
+'Arjun Hariharan, Period , studentNames
+Public Class Form1
+     
+    Private Sub btn404ErrorUsernameNotFound(ByVal sender As Object, ByVal e As System.EventArgs) Handles btn404.Click
+        Me.lstCool.Items.Clear()
+        Dim u(4) As String
+        For i As Integer = 0 To 4
+            u(i) = InputBox("Enter", Me.Text)
+        Next i
+        For i As Integer = 0 To 4
+            Me.lstCool.Items.Add(u(i))
+        Next i
+    End Sub
+End Class
