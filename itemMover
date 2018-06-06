@@ -1,0 +1,51 @@
+'Arjun Hariharan, Period 6, itemMover
+Public Class Form1
+
+    Private Sub discoverLeft(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstLeft.SelectedIndexChanged
+        btnRight.Enabled = True
+        btnRemove.Enabled = True
+    End Sub
+
+    Private Sub discoverRight(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstRight.SelectedIndexChanged
+        btnLeft.Enabled = True
+    End Sub
+    Private Sub addItems(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnAdd.Click
+        Dim var As String = InputBox("Enter item to add", "Enter")
+        If var = Nothing Then
+            MessageBox.Show("You entered nothing", "Nothing")
+        Else
+            lstLeft.Items.Add(var)
+        End If
+    End Sub
+
+    Private Sub toTheLeftToTheLeft(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnLeft.Click
+        Dim righty As Integer = lstRight.SelectedIndex
+        Dim rightyWord As String = lstRight.SelectedItem
+        Me.lstRight.Items.RemoveAt(righty)
+        Me.lstLeft.Items.Add(rightyWord)
+        btnLeft.Enabled = False
+
+
+
+
+    End Sub
+
+    Private Sub removeItems(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnRemove.Click
+        Dim removeItIndex As Integer = lstLeft.SelectedIndex
+        lstLeft.Items.RemoveAt(removeItIndex)
+        btnRemove.Enabled = False
+        btnRight.Enabled = False
+    End Sub
+
+    Private Sub toTheRightToTheRight(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnRight.Click
+        Dim lefty As String = lstLeft.SelectedItem
+        Dim leftyIndex As Integer = lstLeft.SelectedIndex
+        Me.lstLeft.Items.RemoveAt(leftyIndex)
+        Me.lstRight.Items.Add(lefty)
+        btnRight.Enabled = False
+        btnRemove.Enabled = False
+
+    End Sub
+
+
+End Class
