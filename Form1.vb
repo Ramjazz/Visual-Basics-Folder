@@ -1,111 +1,73 @@
-﻿'Arjun Hariharan, Period 6, wordGuessWithAdditions
+﻿'Arjun Hariharan, Period 6, diceGame
 Public Class Form1
+    Private total As Integer = 1000
+    Private Sub formLoad(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Randomize()
+        Dim risk As Integer = Val(Me.txtEnter.Text)
+    End Sub
 
-    Private Sub playGame(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnEnter.Click
-        Me.lblGuess.Text = ""
-        Me.lblWrongGuesses.Text = ""
-        Me.pctPCT.Image = My.Resources.Smiling_Emoji
-        Dim secretWord As String = InputBox("Player 1, enter your word here", Me.Text)
-        secretWord = secretWord.ToUpper.Trim
-        Dim letterGuess As Char
-        Const FLAG As Char = "!"
-        Dim numGuesses As Integer = 0
-        Dim fullWordGuess, letterInput As String
-        Dim tempWord As String
-        Dim wordGuessedSoFar As String = ""
-        Dim length As Integer = secretWord.Length
-        Dim wrongGuesses As Integer = 0
-        Dim wrongLetters As String = ""
-        Dim index As Integer
-        Dim space As Integer = 0
+    Private Sub enterTheDungeon(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnEnter.Click
+        Dim risk As Integer = Val(Me.txtEnter.Text)
+        Dim diceTotal As Integer
+        Dim dice1, dice2 As Integer
+        dice1 = Int(6 * Rnd() + 1)
+        dice2 = Int(6 * Rnd() + 1)
+        Call checkRisk(risk, diceTotal, dice1, dice2)
+    End Sub
 
-
-        For I As Integer = 0 To length - 1
-            If secretWord.Chars(I) = " " Then
-                space += 1
-            End If
-        Next
-        If secretWord.Length < 2 Then
-            MessageBox.Show("That's not a valid word", Me.Text)
+    Private Sub checking(ByVal dice1 As Integer, ByVal dice2 As Integer, ByRef diceTotal As Integer, ByRef risk As Integer)
+        diceTotal = dice1 + dice2
+        If diceTotal Mod 2 = 0 Then
+            total -= risk
+            Me.lblResponse.Text = "Your new total is " & total
         Else
-            If space = 0 Then
-                wordGuessedSoFar = wordGuessedSoFar.PadLeft(length, "-")
-                Me.lblGuess.Text = wordGuessedSoFar
-                Do
+            risk *= 2
+            total += risk
+            Me.lblResponse.Text = "Your new total is " & total
+        End If
+    End Sub
+    Private Sub checkingImage(ByRef dice1 As Integer, ByRef dice2 As Integer)
+        If dice1 = 1 Then
+            Me.picPIC1.Image = My.Resources.die1
+        ElseIf dice1 = 2 Then
+            Me.picPIC1.Image = My.Resources.die2
+        ElseIf dice1 = 3 Then
+            Me.picPIC1.Image = My.Resources.die3
+        ElseIf dice1 = 4 Then
+            Me.picPIC1.Image = My.Resources.die4
+        ElseIf dice1 = 5 Then
+            Me.picPIC1.Image = My.Resources.die5
+        ElseIf dice1 = 6 Then
+            Me.picPIC1.Image = My.Resources.die6
+        End If
 
-
-                    letterInput = InputBox("Player 2: Enter a letter or " & FLAG & " to guess word: ", Me.Text)
-                    If letterInput <> Nothing And letterInput <> FLAG Then
-                        letterGuess = letterInput.Trim.ToUpper.Chars(0)
-                        numGuesses += 1
-                        For I As Integer = 0 To length - 1
-                            If secretWord.Chars(I) = letterGuess Then
-                                tempWord = wordGuessedSoFar.Remove(I, 1)
-                                wordGuessedSoFar = tempWord.Insert(I, letterGuess)
-                            End If
-
-                        Next I
-
-                        index = wordGuessedSoFar.IndexOf(letterGuess)
-                        If index = -1 Then
-                            wrongGuesses += 1
-                            wrongLetters &= letterGuess & " "
-
-                            If wrongGuesses < 2 Then
-                                Me.pctPCT.Image = My.Resources.Smiling_Emoji
-                            ElseIf wrongGuesses < 4 Then
-                                Me.pctPCT.Image = My.Resources.Face_With_Rolling_Eyes_Emoji_grande
-                            ElseIf wrongGuesses < 6 Then
-                                Me.pctPCT.Image = My.Resources.Emoji_post_image5
-                            Else
-                                Me.pctPCT.Image = My.Resources._15106083_G
-                            End If
-
-
-                        End If
-
-                        Me.lblGuess.Text = wordGuessedSoFar
-                        Me.lblWrongGuesses.Text = wrongLetters
-
-
-                    End If
-
-                Loop While letterInput <> FLAG And letterInput <> Nothing And wordGuessedSoFar <> secretWord And wrongGuesses <> 6 And space = 0
-
-            End If
-            
-            
-
-            If wordGuessedSoFar = secretWord Then
-                MessageBox.Show("You guessed it in " & numGuesses & " guesses!")
-                Me.pctPCT.Image = My.Resources.Silly_Emoji
-            ElseIf space > 0 Then
-                MessageBox.Show("You can only have a word, not a phrase", Me.Text)
-
-            ElseIf wrongGuesses = 6 Then
-                MessageBox.Show("Sorry you guessed too many times!", Me.Text)
-            ElseIf letterInput = Nothing Then
-                MessageBox.Show("Game over", Me.Text)
-                Me.pctPCT.Image = My.Resources._15106083_G
-            ElseIf letterInput = FLAG Then
-                fullWordGuess = InputBox("Try to guess the word:", Me.Text)
-                fullWordGuess = fullWordGuess.ToUpper.Trim
-                If fullWordGuess = secretWord Then
-                    MessageBox.Show("You guessed it in " & numGuesses & " guesses!", Me.Text)
-                    Me.pctPCT.Image = My.Resources.Silly_Emoji
-                Else
-                    MessageBox.Show("Sorry, you lose!", Me.Text)
-                    Me.pctPCT.Image = My.Resources._15106083_G
-                End If
-
-            End If
-            Me.lblGuess.Text = secretWord
+        If dice2 = 1 Then
+            Me.picPIC2.Image = My.Resources.die1
+        ElseIf dice2 = 2 Then
+            Me.picPIC2.Image = My.Resources.die2
+        ElseIf dice2 = 3 Then
+            Me.picPIC2.Image = My.Resources.die3
+        ElseIf dice2 = 4 Then
+            Me.picPIC2.Image = My.Resources.die4
+        ElseIf dice2 = 5 Then
+            Me.picPIC2.Image = My.Resources.die5
+        ElseIf dice2 = 6 Then
+            Me.picPIC2.Image = My.Resources.die6
         End If
     End Sub
 
-
-        
-
-
-    
+    Private Sub changeText(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtEnter.TextChanged
+        Me.lblResponse.Text = ""
+        Me.picPIC1.Image = Nothing
+        Me.picPIC2.Image = Nothing
+    End Sub
+    Private Sub checkRisk(ByVal risk As Integer, ByRef diceTotal As Integer, ByVal dice1 As Integer, ByVal dice2 As Integer)
+        If risk > total Or risk < 0 Then
+            MessageBox.Show("Enter a risk less than the amount you have", "ERROR 404")
+            Me.lblResponse.Text = "Your total is " & total
+        Else
+            Call checkingImage(dice1, dice2)
+            Call checking(dice1, dice2, diceTotal, risk)
+        End If
+    End Sub
 End Class
