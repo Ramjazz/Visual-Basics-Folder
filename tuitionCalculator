@@ -1,0 +1,36 @@
+'Arjun Hariharan, Period 6, tuitionCalculator2
+Public Class Form1
+    Private Sub clickForTuition(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnEnter.Click
+        Dim tuition As Integer
+        Dim costPerHour As Integer
+
+
+
+        If cboEnter.Text = Nothing Then
+            MessageBox.Show("Please select your credit hours", "Error")
+        Else
+            costPerHour = Me.cboEnter.Text
+        End If
+
+        Select Case Me.lstCourseLevel.SelectedIndex
+            Case -1
+                MessageBox.Show("Please select a course level", "Error")
+            Case 0
+                tuition = 75
+            Case 1
+                tuition = 145
+            Case 2
+                tuition = 160
+            Case Else
+                tuition = 0
+        End Select
+
+        Me.lblResponse.Text = "Tuition is " & FormatCurrency(tuition * costPerHour)
+        
+
+    End Sub
+
+    Private Sub changeText(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstCourseLevel.SelectedIndexChanged, cboEnter.SelectedIndexChanged, cboEnter.TextChanged
+        Me.lblResponse.Text = ""
+    End Sub
+End Class
